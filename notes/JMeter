@@ -1,0 +1,23 @@
+Apache JMeter v5.4.2
+
+Installation :
+Install Java 8+
+Download Pluignsmanager.jar and place it in lib/ext
+launch JMeter/bin/jmeter.bat
+--------------------
+
+
+
+
+
+
+----------------------
+Best Practice :
+Use JMeter in CLI mode while running LT
+
+Resources :
+
+https://jmeter.apache.org/
+https://jmeter-plugins.org/
+https://github.com/vnagthane/jmeter
+https://qainsights.com/author/admin/
