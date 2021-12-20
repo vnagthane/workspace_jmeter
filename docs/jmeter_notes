@@ -1,0 +1,158 @@
+Apache JMeter v5.4.2
+
+Installation
+-------------------------------------------------------------------------------
+Install Java 8+ and set path , javahome in env variables
+Install Git
+Download Pluignsmanager.jar and place it in lib/ext
+launch JMeter/bin/jmeter.bat
+
+create repo in GitHub
+create workspace directory in local
+open command prompt and run git clone <httpurlofrepo.git>
+git status
+git config --global user.email "vinayaknagthane@gmail.com"
+git config --global user.name "vnagthane"
+git add .
+git commit -m "first commit"
+git push origin master
+-------------------------------------------------------------------------------
+Best Practice :
+Use JMeter in CLI mode while running LT
+Take backup of script before deleting irreverent elements from the recorded script.
+
+-------------------------------------------------------------------------------
+Resources :
+https://jmeter.apache.org/
+https://jmeter-plugins.org/
+https://github.com/vnagthane/jmeter
+https://qainsights.com/author/admin/
+
+PE Clubhouse : Scripting challenges , ask for 1-13 videos to naveen
+
+-------------------------------------------------------------------------------
+
+JMeter Test plan is file XML in the form of tree view
+
+Test plan is root element in JMeter
+we can't delete it from file.
+
+Threads : define the workload
+eg ramp up , ramp down threads
+
+
+Frequently used elements/components in JMeter :
+
+Config elements : define certain details such as : Config, auth, user defined variables etc.
+
+Listener : visualize the test results also for debugging purpose.
+
+Timer : define the delay between the requests
+eg. constant timer, Random timers
+
+Preprocessor : perform certain actions before sending the sampler
+
+Postprocessor : process the response and manipulate
+
+Assertions : define checkpoint, response code, tags,
+
+Test Fragment : works along with module controller
+
+Non Test element : define recording controller  or create mirror server.
+
+Thread Group > Samplers :
+Sampler is critical element in JMeter , it's used to send request
+Eg. HTTP Request, Debug sampler, JSR223 , Flow Control action,
+
+Logic Controller : Helps to control business flow.
+
+We can add the above elements to TP
+
+Starting point of Test Plan(TP) is Thread Group(TG) .
+We can add multiple TG.
+
+
+3 Different Ways to develop JMeter Script for Web Application :
+a. Build in JMeter recorder
+b. Using 3rd Party browser plugins
+c. By manually adding elements to test plan
+
+to test FTP/SMTP , DB we need to add elements manually to TP
+configure and debug and make the script ready.
+
+Prerequisites :
+* Know how of the Application , Functionality
+* Business flow
+* Test data
+
+Demo Application :
+https://petstore.octoperf.com/
+
+JMeter Recording Prerequisites
+* Set the proxy to capture traffic from internet
+
+Windows > Proxy Settings > Manual Proxy Setup : localhost 8888 > Save
+
+JMeter > TP > TG > Non Test Element > HTTP(s) Test script recorder : to set the proxy in jemter
+
+Using built in Test script recorder it will capture lots of irreverent traffic/requests/calls
+so to avoid them we need to do some House keeping work to make our TP efficient.
+
+After creating TP we can disable/ delete the non test script elements such as - HTTP(s) test recorder
+and to quickly validate add  Listener "View Results Tree" for debugging to see request and response.
+
+
+In corporate Network we need to make sure we have to handle proxy username and pwd while launching the browser.
+
+* Verify status code, contents in webpage for response
+
+Steps :
+Configure Script recorder
+Make sure port is avaiable at 8888
+Go to Windows Proxy , Change the settings to 8888
+Launch browser
+
+When recording started we need to launch new browser session
+then it will capture the requests.
+
+
+* Blazemeter : Chrome extension
+It can record the business flow using the browser and export to JMX format.
+without changing the Windows proxy and it will also reduce the house keeping work i.e. it will
+not capture the irreverent requests.
+
+Once filling all details , refresh the page to record the requests.
+
+
+
+Drawback : need to create Blazemeter account
+
+Provide details in plugin for recording such as :
+User agent/browser , Filter Pattern for exclusion of requests.
+
+Advance options
+
+After recording we can export the file to JSON, JMX, Taurous or Run the recorded script in cloud (free tier)
+
+# HTTP Request Sampler  : most used sampler in JMeter
+
+HTTP Request Method is only mandatory parameter in HTTP request sampler.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Q : Does in RT do we prefer Blazemeter plugin for recording?
+
+Ref Links  :
+Sagar S
+unable to save as test plan in Jmeter | java.lang.NoClassDefFoundError jmeter gui util FileDialoge
