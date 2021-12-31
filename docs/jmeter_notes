@@ -25,9 +25,12 @@ Take backup of script before deleting irreverent elements from the recorded scri
 Resources :
 https://jmeter.apache.org/
 https://jmeter-plugins.org/
+https://github.com/vnagthane/Learn-JMeter-Series
 https://github.com/vnagthane/jmeter
 https://qainsights.com/author/admin/
 
+Next >
+PT Crash Course
 PE Clubhouse : Scripting challenges , ask for 1-13 videos to naveen
 
 -------------------------------------------------------------------------------
@@ -137,6 +140,1231 @@ After recording we can export the file to JSON, JMX, Taurous or Run the recorded
 # HTTP Request Sampler  : most used sampler in JMeter
 
 HTTP Request Method is only mandatory parameter in HTTP request sampler.
+
+Default port number for HTTPS is 443
+
+server name should be only domain name. eg. google.com and not the google.com/about
+
+301 : Resource moved permanently
+
+JMeter is not browser but i has capabilities to work like browser
+
+like redirections etc. we can control using HTTP request sampler.
+
+Default : follow redirects is selected which creates sub samplers for redirect
+
+https://bit.ly/2MMhui5
+
+if we select Redirect automatically, then it will not create sub sampler reqeust for redirect
+
+HTTP Sampler redirection options Use case : to measure the time taken for redirection between the reqeusts.
+
+Max redirects can be configurable in properties in JMter.
+
+Use keep alive : to keep alive the connection
+use multipart-data : to send multipart data in post payload
+browser compatible headers : to check browser compatible headers.
+
+write URI's into path
+
+Parameter : passing key value pairs
+
+Body Data : information in JSON file in key value pair
+we can either use Parameter or Body data not both simultaneously.
+
+Files Upload : Jmeter will upload the file on server by specifying
+File path, Parameter name, MIME Type
+
+We can either use parameters or body data as raw test as per Application is configurations
+
+Advanced Tab :
+HTTP Request Sampler by Default uses : HttpClient4 implementation to send the request to server
+if it's java implementation then select "Java" but it has limitations such as kuberbose,limited reqeusts support etc.
+
+Timeout : we can configure
+connect timeout - 5000ms if it does not connect in 5 sec then request will fail
+Response timeout - if not received within specified time then request will fail.
+
+
+Embedded Resource : it will define how the request will be simulated as compaired to browser.
+
+debugging tips :
+If request is failing , enable auto redirection or manually go to web browser and open the URL to check
+
+
+website consists of : images, png, html/css and lot other Resources
+and when we hit the url on browser it will generate lots of requests in network tab
+to simulate the browser like scenario using jemter we need to select "Retrive all Embedded Resource" option.
+
+if we uncheck this in JMter , it will give server response time where as in browser we will get the rendering time
+of the web page. so the load time will be Different for JMeter request and browser for the same request.
+
+parallel Download : use default
+
+when we select "Retrive all Embedded Resource" enable then the page load time will
+be as same as DOM page load time of browser, it will not match with number of request or time
+but it will be close.
+
+this is how we simulate like real browser using JMeter , again it will not
+be exactly like a browser.
+
+recommended to stick to parallel download to 6 or Default option given by tool/Application
+
+To download all the files use - "Retrieve all Embedded Resource"
+this option to simulate like browser
+
+URL Must match : retirves only the resouces which matches with the given url in field.
+
+In corporate network we can configure "Proxy Server" details in the Pane.
+such as Server name / IP ,  Port Number, Username, Password ,source address type
+
+Optional Tasks: Save response as MD5 hash.
+it will store 32 char MD5 hash instead of storing whole response.
+
+it will be useful while testing large amounts of data.
+
+# Supplementary elements for HTTP Request
+
+It will work along with HTTP Requests.
+
+demo application : rest api version of pet store web Application - https://petstore.swagger.io/
+
+1. Http Requests defaults : help to reuse configuration for HTTP request.
+To make use of this, idenfiy what is common in each request in Test plan.
+eg: Protocol, servername etc.
+
+Advantage : in case of update in servername we can change only in the reqeust defaults instead of updating
+in each reqeust. so reusbality is advantage here.
+
+Script maintenance will be lot more easy
+
+HTTP Header manager :
+Frequently used HM parameters as
+User-Agent (google it )
+Referrer
+Content-Type  application/json
+version : 5.3
+
+We can have multiple header manager and also we can save it in bin
+
+if we add duplicate value in multiple header manager it will take first header manager value
+
+Usecase :
+In APM tool we can uniqeuly identify the request using header manager version
+
+usually get calls gets cached and post calls will not
+
+HTTP Cache Manager :
+we can add caching capabilities to JMeter using this controller.
+
+max no of elmenet we can cache is 5000 but it can be changed.
+
+using cache header manager, the average response time will get reduce.
+
+HTTP Cookie Manager :
+Cookie is small piece of information stored locally when we browse website
+eg. shopping cart info, personal perferences, authentication string, browsing history
+
+It will store cookie and use it in subsequent requests.
+
+it will send the cookie data at each request if we store in cookie manager.
+
+when we select clear cookie for each iteration then cookie amanger will not store the data locally
+it will fetch fresh data from server each time.
+
+To simulate realworld scenario we need cookie information to be sent along with request.
+for that reason we should use the HTTP cookie manager config element.
+
+HTTP Authorization Manager :
+Its sampler , used to specify one or more user logins for pages that are restircted
+using server authentication.
+
+eg. If a webiste we are downloading/accessing resouces which has server authentication
+Authorization manager will ensure we can pass the creds along the request
+
+Sometime this appear in in View results tree under : HTTP request header , sometime it may not appear.
+
+perftractor.xyz
+
+https://zigzag-selective-boysenberry.glitch.me/
+username : guest / test
+
+without entering creds we can't access the app
+
+To overcome this use HTTP Authorization Manager
+provide base url, username and pwd
+
+JMeter will send user creds by encoding into Base64
+but its not safe.we can decode the base64 and fetch username and pwd.
+its not recommended.
+
+but using Authorization manager we can pass along the user creds in subsequent Requests
+
+401 : Authorization error if incorrect user pwd
+
+---------------------------
+
+CSV Data Set config : Helps to inject multiple sets of data to requests
+to validate response or business flow.
+
+To test the application flow with different datasets
+To simulate realworld scenario
+
+In JMeter we can use multiple ways -
+CSV Read fn, String from file, read dataset or read from csv dataset config.
+
+Identify type of test data and prepare it in proper format such as csv,txt etc.
+
+In Project, we can geneate data on your own / contact devs or test data management team or
+if have access to db , extract it and scamble the data for testing.
+
+Map it the file to csv data config in jmeter
+
+Make sure test data file should not have any invalid entires / conflicts then it will not inject the data
+
+Ignore first line : Set to False if we use "variable Name" defined in configuration
+
+Sharing Mode :
+Current Thread Group : each file is opened once for each thread
+All Threads : generally used option , file is shared between all threads
+Current Thread : Each file is opened separately for each thread
+
+using CSV data config we can parametrize test plan for data driven testing.
+
+# Random Variable : to create request with random test data on the fly
+when test is running.
+
+Multiple ways we can generate random data using - Random variables, random fn , custom fn to generate random elements
+
+We can add Random variable at TP Level or TG level.
+
+Seed for Random function : starting value
+
+Map the Random variable in sampler Request data (Dummy sampler)
+
+# DNS Cache Manager :
+
+convert domain name into IP address like phonebook
+By default JMeter uses JVM DNS cache
+it will always hit one set of server/cluster, it will not hit all the resources behind the LB
+due to caching ,To test other resources in round robin fashion that is where DNS cache manager comes into picture.
+
+We need to specify Resolved either - System DNS resolver or Custom DNS resolver
+
+Static Host table : mention list of host name to IP address
+
+Add DNS CM to TG or TP
+works only with HTTP4 client implementation
+
+To veify that request is using DNS CM, use wireshart/windows network manager or set log level to Debug in jmeter and check the logs entires
+press ! to see log viewer
+
+
+Host Table :
+Its mapping of IP address to host name
+its similar to windows hosts file
+
+Instad of updating local host file we can add entries here and test it.
+
+Hugo server : qainsights app repo github
+
+We can't add port number in hosts file
+so all port number we should mention in HTTP request
+
+using static host table we can test multiple server, hosts name
+
+# HTML Link parser : usefule to Randomise test data, click on random links , extract something etc.
+
+It will modify HTTP sampler based on previous requests response
+it will extract links and forms from previous response
+and using RE we can use to extract and send that information to subsequent requests.
+
+Usecases :
+Spidering
+Random Test data
+
+HTTP URL Rewriting Modified : This is also Modifier element in JMeter ,
+more efficient and easier then HTML link parser
+
+We can extract values from response, it avoids making use of RE
+
+Usecase :
+1.Random clicks using loop count
+
+2. Random Test data
+
+blazedemo.com
+
+Randomise the To and From city while booking eticket
+
+Randomise selection
+
+
+Usecase 3 : to fetch url query parameters received from server in the URL
+using HTML URL Rewriting modifier.
+
+We can encode the URL , store Cache session id using this Preprocessor
+
+Only pre-Prerequisites for using this Preprocessor is we should know what query parameters are required.
+
+Keyword : Intershop Enfinity compatible
+
+# RE Extractor :
+
+In LR the process of extraction from server response is called Co-relation.
+in LR its manual and auto.
+
+In JMeter this whole process is called extraction.
+it can be done using different type of extractors such as - common re extractor, boundary based extractor, css based , json , JMes path extration etc.
+
+As PE we should understand app architechtre. , where uniqueness is getting generting how to handle that
+coz server expects new value every time.
+
+During recording, if we record session details and re-run the same script, it may not work as
+session is already expired.
+
+to handle this in JMeter we follow the process called "Extraction"  or in other word "Corellation (LR)"
+
+basics of regex :
+. match any single char except newline
++ match the preceding element 1 or more times
+? match preceding element 0 or 1 time
+* match preceding element 0 or more time
+
+extract_places - name of variable
+
+() : group
+
+$1$ : capturing group number
+
+0 Random ,  -1 :  All, n : nth occurrence
+
+No place found - default
+
+This extractor is  very useful in Banking , insurance projects
+
+We can also check : respoinse code, URL, Resp headers, Body, Response msgs
+
+# JSON Extractor :
+if we want to extract JSON key values paris in Web Service Performance Testing projects we can use this extrator.
+
+Its post processor element
+It must be placed as child of HTTP sampler.
+
+it helps us to extract data from JSON reponses using JSON-PATH syntax
+
+write JSONPATH to validate response
+
+Match number 0 random, -1 all, n for nth occurrence
+
+
+Response code:405
+Response message:Method Not Allowed
+
+Response code:415
+Response message:Unsupported Media Type
+
+Response code:500
+Response message:Server Error
+
+Response code:404
+Response message:Not Found
+
+
+
+JSON Path Tester
+$. starts with root
+
+
+Json format more flexible then RE extractor
+
+jsonpath.com
+
+# JMesPath Extractor :
+Its Postprocessor
+used to extract values from structured response such as XML or HTML using JMesPath query language
+
+
+JSON matching expression path
+its query language for JSON
+Drawback : Only one JMES exp can be entered at a time.
+to use multiple use time use  multiple Postprocessor in TP
+
+We have inbuilt testing tool in View Results tree to validate response
+
+$ : root
+.. key value
+
+$..PhoneNumber[0]
+$..PhoneNumber[-1:0] - reverse the order
+$..PhoneNumber[-1:0].number
+
+jmespath.org
+
+PhoneNumber[*].number | sort(@)
+
+length(PhoneNumber[*].type)
+
+# Inter thread Communication [JMeter plugin ] :
+
+enables Communication between threads
+
+It implements FIFO approach for elements.
+
+ITC Postprocessor
+ITC Preprocessor
+
+Alternate approach to implement this is use functions
+
+fifoPut - puts value in queue
+fifoGet - gets value from queue , don't wait
+fifoPop - get string value from FIFO and removes item, wait until there is data
+fifoSize  - returns no of items in queue
+
+Functions :
+Queues are not cleared automatically
+Queues are cleared with first fifoPut
+Generate random queue name
+
+Plugins :
+clear queues at test start and test stop
+In plugins we need add element using context click
+
+Response code:405
+Response message:Method Not Allowed
+
+Response code:415
+Response message:Unsupported Media Type
+
+
+
+
+
+
+
+
+# CSS Selector Extractor :
+
+allow user to extract values from server HTML response using CSS Selector syntax.
+
+CSS / jQuery based syntax
+JSoup(default)
+Jodd-Lagarto(CSSelly)
+
+https://computer-database.gatling.io
+
+We can either use CSS selector or RegEx to extract value from response.
+
+a:contains(MacBook)
+
+# boundary Extractor :
+allows to extract values from server response using left and right boundaries
+
+Use case : extract links of first 10 computer names
+
+Drawback : can't extract exact occurrence
+
+# Xpath2 Extractor :
+ allows to extract values from structured response such as XML or HTML
+ using Xpath2 query language. It's Postprocessor.
+
+Xpath query  -
+/*/*/* : gives all child elements
+/catelog/book[1]/title
+
+(//*[name()='AddResult'])/text()
+
+We don't need namespace alias if not using namespaces in xml query
+
+# Uniform Random Timer :
+Its used to mimic realworld scenario
+It injects time in the test plan
+Its simmilar to Think time in LR
+
+usecase : To fill the form, different users may take different time to simulate This
+we can use Timers.
+
+time.factor = 1.0f ( one fold of default timer , its customizble )
+
+Timers are processed/executed before each sampler or request  in the scope.
+
+Eg.
+Test Plan
+Thread Group
+Req1
+Req2
+Uniform Random Timer
+
+Order of execution >
+
+Uniform Random Timer
+Req1
+Uniform Random Timer
+Req2
+
+Timers will take highest priority during exaction.
+
+Types of Timers :
+-----------------
+Constant Timer -
+Gaussian Random Timer
+Uniform Random Timer :
+
+Total dealy (ms) = random(max) + const delay
+
+If we add timer at TG level then it will be executed before each request/sampler
+
+
+Go to jmeter.properties and go to Think time configurations
+
+copy the text and go to user.Properties and paste there and enable the time factor
+time.factor = 2.0f
+
+restart JMeter , new properties will be picked up
+
+so the timer will be multiple of 2 given in the configurations of timers.
+
+Constant Throughput Timer
+
+Precise Throughput Timer : introduces variable pauses , calculated to keep total throughput as close as possible to given figure.
+works best for rates under 36000 requests/hour.
+
+Best practices :
+----------------
+Keep it under the first element
+leverages Passion point process
+Set Ramp-up Period and delay to 0
+works well with multiple thread group
+
+how it works :
+*when we add this timer to TP, it creates a schedule and keep it in heap memeory
+
+schedule creation is good if there are  <1 million samples in TP.
+
+1 million samples - ~200ms and occupy 8MB of heap
+for example : 5 minutes test with 200 sample per minutes
+
+Batched departures : to send multiple request at the same time
+
+the number of samples in batch
+delay between them
+0 - truly random
+
+Always go by business requirement the details to enter for timer in configurations.
+
+Throughput depends on TP elements , heap memory, OS , jdk etc
+
+No of threads should be less then target throughput threads.
+
+
+
+
+Synchronizing Timer :
+is to block threads until N number of threads have been blocked and then they are all released at once.
+When we want to trigger n number of samples at the same time to generate more load at server side
+
+its similar to Ramdev point in LR i.e. to execute all users at same time.
+
+Imp points :
+
+if No of simultaneous users to group by == 0
+current TG 'Number of Threads' will be used for execution.
+
+if Number of simultaneous users to group by < Number of threads
+Load will split
+
+if No of Sim users to group by > Number of threads
+no execution.
+
+
+
+
+Bandshell Timer
+JSR223 Timer
+Poisson Random Timer
+
+
+# Throughput Calculations :
+
+Accuracy will be more in case of shared  algorithm
+Accuracy will be less in for non shared algorithm
+Accuracy target throughput output will be more in case of this thread only
+
+Config :
+this thread only
+all active thread
+all active thread in current thread group
+all active thread (shared)
+all active threads in current thread group(shared)
+
+Its recommended to keep "Constant throughput" timer in right place and Calculate Using
+right throughput Calculation algorithm otherwise will end up in having more or less throughput and not the accurate
+
+Throughput is determined by not only machine configuration but also timer and other elements in TP
+
+JMeter tries to keep up the throughput.
+Throughput depends on available resources , timers, and other elements.
+Do not change throughput Frequently.
+Shared algorithm is more accurate.
+
+
+Best practice :
+Provide ramp up period for the test always.
+
+
+# Listeners in JMeter :
+listening to Test results
+view / save / read (xml, csv, jtl format )
+commonly used listeners are - View results tree, summary report, aggregate report, backend lister , Simple data writer
+
+we should not add more listeners as it consumes memory
+Best practice :
+Don't add listener during Load test only use it for debugging purpose.
+If we want to write , use command line parameters, -L and write to some file then read the file for analysis
+
+Simple data write is memory efficient listener
+
+
+aggregate report will display percentile, it will not give more insights about reqest and response
+
+
+Backend Listener : useful while working with influx DB to send data at runtime
+
+recommended is Simple data write or JSR223 custom
+
+Logic controller :
+IF controller - evaluates condition and decides to run the elements or not
+Make sure to Interpret condition as variable exp so that it will evaluate jexl3(java exp langauge) or groovy syntax
+
+# While controller : runs its children until condition is "False"
+
+access the index using '${__jm__<name of while controller>__idx}'
+
+any variable of function or property (which has the value 'false') that eventually evaluate to string 'false'
+
+WHILE CONTROLLER - EVALUATION
+
+blank
+LAST
+Otherwise function or variable which has string 'false'
+
+While controller will keep on executing until the last controller Fails.
+
+Loop Controller : After adding to TP , it will run its children n times
+
+access index using '${__jm__<name of loop controller>__idx}'
+
+It can be used under TG & Loop count
+we need to map Loop controller with Loop count.
+
+No of threads in Loop count in TG with Loop controller.
+1 * 5 = 5 : will get 5 samplers in view results Tree
+Loop count : 3 * Loop controller (Loop count) : 5  = 3 * 5 = 15 samples in VRT
+
+Loop controller (Loop count) : 3 * Thread Properties (Loop count) : 5 * Thread Properties (No of threads) :  2  =  2 * 3* * 5 = 30 samples in VRT
+
+Transaction Controller : measures the overall time taken to perform nested test elements.
+
+Help to measure the performance of child elements.
+If we want to measure something then we add all the elements under Transaction controller.
+
+To know the end to end response time taken by requests/controllers , all those samplers inside Transaction controller
+It will sum up all the requests and gives the consolidated response time when we check "Generate parent sample" option in txn controller.
+
+Throughput Controller : allows user to control how often elements being executed.
+
+its main purpose is split the load.
+
+it splits the load based on percentage or per user under
+
+If we select percentage exectuion option and Per user checkbox, it will not make any differrence
+However if we select "Total Execution" and provi de throughput number
+
+The thougput will send only that many request mentioned in the throughput filed irrespective of TG configurations.
+
+# Critical section controller : It will execute the elements using only one thread at a time.
+It applies lock to the thread during execution.
+
+Synchronizing Timer will execute all at Once
+Critical Section controller will executes samplers sequentially i.e. one at a time.
+
+Lock name should be unique in critical section controller.
+
+# Module Controller :
+
+List out all TG and it's elements
+Find target element reaches the selected element
+Must have unique name
+
+It provides mechanism for substituting test plan fragments into current test plan at run time.
+
+for example, suppose we need to add add to cart controller present in TG2 into TG1 , either we can paste it but it will be duplicate or use Module controller.
+Using module controller we can achieve reusability of controller.
+
+# JSR223 Sampler :
+
+JSR : java specification requests - its formal document that describe proposed specification and technologies.
+
+223 its ID for scripting for java platform.
+
+In JMeter we can use -
+JSR223 Preprocessor
+JSR223 Sampler
+JSR223 Postprocessor
+
+groovy is recommended language to use in JSR223 Sampler however we can also use java / jexl file or we can write script in external file or in JSR223 IDE
+
+If script is too large, we can keep it in seprate file and reference in JMeter IDE>
+
+If feature is not avaiable out of the box in JMeter we need to write custom code to achieve business requirement
+that is the core of JSR223 Sampler.
+
+# Groovy Scripting in JMeter :
+
+Groovy is dynamic programming language for JVM.
+It has syntax simmilar to Java however it includes features found in Python, Ruby and smalltalk
+
+JSR 241 : The Groovy programming language
+
+we can either use it as programming or scripting language for java.
+i.e. static as well as dynamic programming language.
+
+
+Release in 2007 current version is 3.0.7
+
+We can use JSR223 element as Preprocessor / Postprocessor or use it as sampler.
+always check the option - Cache compiled script if available.
+
+
+* JMeter variables
+
+* Grovvy Variables
+
+# File IO :
+Use case - after extracting post processor values , write into CSV file
+using JSON sluper library we can manipulate JSON file.
+
+# Execution Order and Scoping :
+Test plan consists of different JMeter elements such as - (Conf-Pre-T-Sam-PAL)
+1.Config elements ( Header manager...)
+2.Pre-Preprocessor
+3.Timers
+4.Samplers
+5.Post-Processor
+6.Assertions
+7.Listeners
+
+Timers, Assertions, Pre and Post Processors are only processed if there is a sampler.
+Logic controllers and samplers executes in order they appear
+Other elements executes as per scope
+
+# JMeter plugins : It extends the functionality of JMeter
+
+JMeter behind the Proxy
+
+Sometime we can't launch the plugins manager due to proxy issue especially in corporate network.
+
+> jmeter -H my.proxy.server -P 8000 -u username -a password -N localhost
+
+# Serving Internal Developed plugins :
+
+Create JSON
+Sample repo https://jmeter-plugins.org/repo/
+
+ * JMeter plugins settings
+
+Plugins Popularity :
+Plugins Manager
+Custom Thread Group
+3 Basic Graphs
+PefMon (Server Performance Monitoring)
+Dummy Sampler
+Thoughput Sampler
+Thoughput Shaping Timer
+Custom JMeter Functions
+...
+Console Status Logger
+
+Tips : keep only relevant plugins and use latest version
+Disable the stats sending request in JMeter properties file.
+jpgc.repo.sendstats=false
+
+
+# TG : validate and smoke load testing
+
+Thread Group :
+Assume TP consists of - 30 Threads (T) , 60 Sec Ramp up (t) : t/T
+each thread will take 2 sec (60/30 = 2 sec)
+
+After configurations , validate the Test Plan i.e. Test the TP works fine with multiple sets of data.
+by default using 1 Thread we can validate TP but it can be configurable.
+
+Start : Starts immediately execution as per design.
+Start no pauses : It will not execute any timers in TG
+Validate : always runs with 1 TG and 1 Iteration.
+
+Run Smoke Test : Right click on TG and select Validate/ Start no pauses /
+
+> docker ps
+> docker logs <containerID>
+> docker logs continerID | tail -10
+> docker logs continerID | grep 400
+
+Summary Report :
+
+Load Test : It helps to study the application behaviour under the defined load.
+
+> jemter -n -t <*.jmx> -l <*.jtl>
+
+> jemter -n -t Smoke-Load-Testing.jmx -l Run1.jtl>
+
+>
+
+plugin : Connect Times Over Time
+
+# Generate HTML Report :
+> jmeter -n -t LT.jmx -l run1.jtl -e -o dirname
+
+# Reading from properties file :
+Helps to automate , integrate with CI CD pipeline and flexible
+multiple ways to implement
+
+steps :
+1. create *.properties
+2. Launch JMeter using '-q' argument
+
+eg
+test.properties
+---------------
+numberofthreads=10
+url=example.com
+protocol=https
+testduration=30
+loop=50
+
+
+> jmeter.bat -n -t Read-from-properties.jmx -l MyRun3.jtl -q test.properties
+
+# JMeter Backend listner :
+TO view realtime stats , InfluxDB and Grafana is one of the Integation with JMeter that can imeplement easily
+We will get extended capabilities of performance monitoring features.
+
+we can create charts, Graphs, alerts etc
+
+InfluxDB : Ingest metrics , events and logs in high performing time series database capable of ingesting millions of data points per second.
+
+Grafana : Use to compose dashboards with Prometheus & Graphite metrics
+
+JMeter Backend Listners
+
+JMeter Jenkins : comparison with previous build : avg time, min, max
+
+# Server Performance Monotring :
+By default we can't get Server side metrics in JMeter such as - CPU, Memeory, Network, Disk and Swap
+Its ciritcal to monitor performance of servers being tested.
+
+PefMon Server Agent -
+Download zip file
+start startAgent.sh or startAgent.bat
+Default port is 4444
+
+Use PerfMon metrics collector listner to publish the data i.e. it will read the metrics from server agent.
+Alternate to the above approach for collecting the server side metrics is APM tool such as - dynatrace, Appdynamics
+
+
+TODO Integration :
+
+JMeter with InfluxDB and Grafana
+JMeter with Jenkins
+JMeter with Docker
+JMeter with Dynatrace/Appdynamics
+
+Docker : its open platform for developing , shipping, and running apps
+
+How to run JMeter TCs in Docker :
+
+> docker pull qainsights/windows-docker-jmeter //pulls docker image from repo/container registry
+
+> docker images : lists the images avaiable
+
+> docker run -d nginx : run the image
+
+> docker ps : list all running containers
+
+> docker ps -a : list all containers with stop and start status
+
+> docker container ls
+
+hub.docker.com > search JMeter > jusb4/jmeter
+
+>docker pull jusb4/jmeter
+
+>docker tag jusb4/jmeter jmeter //tagging image
+
+> docker images
+
+> docker ps //running containers
+
+> docker run jmeter
+
+objective jemter is run in CLI mode
+
+> docker run jmeter -n -t bin/examples/CSVSamples.jmx -l ./bin/examples/run1.jtl
+
+> docker ps -a
+
+copy the container content into local machine
+
+> mkdir jmeter-results
+
+> docker cp <containerID>:<sourcedir> <targetdir> . <currentDir>
+
+> cat run1.jtl
+
+mount OS folder to continer , so once execution is done it will place the files in mounted folder.
+
+> docker run --mount type=bind,source='',target='' jmeter -n -t bin/example.jmx -l bin/example-run1.jtl
+
+# Remote dist testing in JMeter :
+
+From one single instance of JMeter we can't test high load, we will reach the limit of CPU, Memory and other parameter of system.
+
+we can make use of master-worker step in JMeter
+
+Use case : to inject load of 10k threads , we can't inject from one machine so split the load across multiple machines and those nodes will
+inject the load to AUT (application under test)
+
+JMeter Master acts as controller , it will control the worker machines by sending commands and listening to results.
+And Worker load will send load to AUT , sends back the results to JMeter Master node.
+
+Steps :
+
+Configure worker nodes ( windows/Linux/other OS)
+Configure Master nodes ( windows/Linux/other OS)
+Start the test.
+
+Prerequisites :
+use consistent java versions across the nodes
+All the nodes should be in same subnet.
+By default remote distributed setup uses the SSL setup
+
+Master node configuration :
+
+jmeter.properties file >
+search RMI and provide remote_hosts : provide IP address of remote machines.
+
+ server.rmi.ssl.disable=true
+
+ssh into worker node
+
+ipconfig
+
+jmeter.properties >
+
+server.rmi.localport=4000
+server.rmi.ssl.disable=true
+
+Start JMeter server in worker machine
+
+and run the command
+
+
+Go to worker machine and launch the JMeter
+
+Run > Remote Start > IP address of all worker nodes
+
+Remote start All > it will send TP to all worker machines.
+
+Under the hood, Worker nodes will have actual copy of test plan (TP)
+i.e. 10 * 10 = 100 Threads will be injected
+make sure we have consistent versions of jmeter,plugins,test data , path,file
+placed across all worker nodes.
+
+It will send only TP to worker node. Its our responsibility to keep all the other files in Worker nodes.
+
+* SSL Setup :
+
+jmeter.properties >
+
+server.rmi.ssl.disable=false
+
+bin > create-rmi-keystore.bat
+
+Place this newly created RMI file across worder node
+
+JMeter > Run > Remote Start > Click on remote node IP
+
+# Remote distributed Testing in AWS :
+
+Setup EC2 Instance (Ubuntu)
+Master
+Worker
+
+ssh into master and worker
+
+download jmeter tar files using wget  in both worker and master
+
+tar -xzf apache-jmeter.tgz
+
+rm apache-jmeter.tar
+
+ls
+
+vim jmeter.properties
+
+server.rmi.localport=4000
+
+generate cert :
+
+$ ./create-rmi-keystore.sh
+
+place rmi file using filezilla into worker nodes
+
+go to Master > ./jmeter -n -t ./example/csvsample.jmx -R=ipaddressofworker
+
+go to security group of EC2 > set inbound rules for incomming as well as outgoing connection.
+
+# Write Custom Grovvy functions :
+
+built in groovy functions to evaluate the expressions :
+
+${__grooovy (1+2,)} => 3
+
+also we can write own :
+
+${__grooovy(square(5),)} => 25
+
+# Enable groovy.utilities=utility.groovy in 'jmeter.properties' or 'user.properties'
+
+Open utility.groovy from bin folder
+
+Restart JMeter
+
+.\jmeter.bat -Jgroovy.utilities=utilities.groovy
+
+
+go to user.properties
+
+groovy.utilities = utility.groovy
+
+utility.groovy file :
+
+def factorial(n) { n ==1 ? 1 : n * factorial(n-1)}
+
+def square(n) {
+  return Math.pow(n,2)
+}
+
+
+JMeter > Dummy sampler
+
+Evaluate fn in fn helper dialog : Groovy
+Exp to evaluate : 1 + 2 > generate & copy to clipboard
+Exp to evaluate : square(5) > generate & copy to clipboard
+
+
+# FTP SSH SFTP Sampler :
+
+FTP requires server name, filen name, port no , action - rw file
+
+SSH Sampler - Download plugin
+
+provide all details in FTP sampler and click on Run
+
+Open filezilla server and check the logs
+
+SSH FTP
+
+* Keep in mind the latency part while dealing with FTP SSH
+Latency is nothing but the authentication timing i.e. it's login Transaction
+
+
+# MQTT Sampler : Message queuing telemetry Transport
+
+Its lightweight Pub/Sub reliable msg transport protocol suitable for Communication between devices
+
+Which ever client which want to get notified , it needs to be subscribed to topic, so that MQTT Broker will publish data realtime.
+
+it will get published to MQTT broker.
+
+MQTT Broker :
+JMeter we can download the plugin xmeter-net (from github jar) , put it inside lib & ext folder.
+
+Flow :
+
+Connect > Subscribe > Publish > Disconnect
+
+QoS 0 - at most once > Fire and forget
+QoS1 - at least once  ( tradeoff between 0 and 1 )
+QoS2 - exactly once > elevated latency
+
+Here we will measure - how many msg has published , latency, response time ,
+Objective is how many messages processed per second.
+
+JMS Point to Point and Pub Sub :
+Its API use to communicate between two applications by sending and receiving the messages.
+Its loosely coupled , reliable and asynch in nature.
+
+Message Broker tools :
+
+IMB MQ , Active MQ, Rabbit MQ, Google Cloud Pub/sub , Mulesoft Any point, Amazon MQ.
+
+Active MQ : Its java based open source messaging server.
+
+JMS Pub & Sub -
+
+Publisher > Queue > Client 1
+
+JMS in JMeter
+
+Out of the box support
+JMS Pub-Sub
+JMS Point to Point
+
+# Workload Model : its understanding the real world traffic pattern and deploying in test
+Its distribution of Transaction to test the system in non prod env and aniticipate how it will behave in prod environment.
+
+As PT , it's our responsibility to simulate realworld scenario in non prod environment.
+
+Types :
+
+Open : we define the arrival rate.
+i.e. how many users will arrive to the application.
+eg. 10 User/min or 60 users/sec
+
+typical website follow open workload model eg amazon
+
+
+
+Closed -
+we define the concurrency
+eg. define 50 threads only we are going to test for specific duration.
+Internally it will wait for each user to complete iteration then only next iteration will start.
+
+When threshold is reached , we define the queuing mechanism.
+
+In JMeter we can implement these workload model using Plugins.
+
+Open workload Model :
+Using Custom TG (Arrival TG ) we can create Open workload model for specific duration.
+
+We define the arrival rate, JMeter will automatically spin up the required number of threads  based on arrival and tries to maintain
+the state using custom thread group.
+It allows everyone to enter into system.
+
+Closed Workload Model :
+we define the number of users we want to test and after certain number of users the application might use queuing mechanism.
+We define number of threads only , JMeter will executes those many threads and keep on repeating till the duration ends.
+eg . if we define thread as 5, then only 5 will be executed during the entire duration.
+
+
+Ultimate Thread group we can define each phase ,steps , ramp up duration.
+
+# Beanshell server : its small, free Embedded java source interpreter with object scripting language features, written in java.
+
+Acts as server. HTTP(900) or telnet (9001)
+
+JMeter.properties > enable
+
+beanshell.server.port=9000
+beanshell.server.file=../extras/startup.sh
+
+>> java -jar ..\lib\bshclient.jar localhost 9000 ..\extras\update.bsh 10
+
+update.bsh
+--------------
+printporp("timer")
+
+setprop("timer", args[0])
+
+Drawback : we can't change number of threads using beanshell server.
+
+Beanshell Server is useful while running endurance/SOAP testing.
+
+# Flow control action  VS Timers
+
+Flow control action -  use to take logical action on threads or test
+basically to pause for certain duration, start next thread loop , break , go to next iteration etc.
+
+when we add Think time , It will automatically add one element "Pause" (Uniform Random timer)
+there is reason for it, if we want to pause thread using constant delay or equivalent of constant timer then configure the duration here.
+To inject random delay then set the Think time duration to zero
+
+If we want to provide range, its not possible here in think time so using Uniform delay timer it's possible to add.
+Its not just Uniform random timer, we can use Gaussian, Thread.sleep etc timers we can add it as child to inject randomness
+
+Timer has high priority, it will add up all the timers present in TP.
+Using timer, the throughput will be less as compared to FCA.
+
+The number of samples will be same for both Timers and FCA.
+Which approach to follow it's up to business requirement.
+
+If we need initial delay , go with FCA.
+The Constant Timer approach gives more control , as we can add element wherever we want.
+
+Timers will add up all the Delay present in TP
+FCA is more then timer.
+
+# JMeter with Maven
+
+SW project management tool
+It has POM File.
+use for build, reporting, documentation.
+
+Steps :
+add plugin in 'pom.xml'
+Place JMeter test plan and its dependencies
+Run the test 'mvn clean verify'
+
+* Go to GitHub :  JMeter maven plugin repo
+
+* Create maven project in intellij / eclipse.
+
+* copy the xml content from plugin repo and place it in POM.xml
+also configure customPropertiesFile  for dataset config files, properties file which has details about JTP (Jemeter test plan)
+
+* Create TP in JMeter
+
+* Create JMeter directory under Test folder in intellij maven directory and place jmx, csv config dataset files , properties file ( contains data such as LOOP_COUNT = 2 etc)
+
+* run > mvn clean verify
+
+* check target > Results : to see the execution results in Intellij workspace after execution.
+
+
+
+
+
+
+
+
+FCA, Timers, Thread.Sleep - all are used to inject delay in TP
+
+How many samples we are achieving FCA & Timers :
+
+FAC
+
+Timers are used to avoid overwhelm the server.
+
+Think time -
+Uniform Random timer
+
+Unique Client ID
+Keep alive
+Retained Messages
+
+
+
+
+
+
+
+# Designing Workload model :
+
+
+
+Approach :
+First watch the video , make notes > then do hands on
 
 
 

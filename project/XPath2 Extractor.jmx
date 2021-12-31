@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <kg.apc.jmeter.samplers.DummySampler guiclass="kg.apc.jmeter.samplers.DummySamplerGui" testclass="kg.apc.jmeter.samplers.DummySampler" testname="jp@gc - Dummy Sampler" enabled="true">
+          <boolProp name="WAITING">true</boolProp>
+          <boolProp name="SUCCESFULL">true</boolProp>
+          <stringProp name="RESPONSE_CODE">200</stringProp>
+          <stringProp name="RESPONSE_MESSAGE">OK</stringProp>
+          <stringProp name="REQUEST_DATA">Dummy Sampler used to simulate requests and responses
+without actual network activity. This helps debugging tests.</stringProp>
+          <stringProp name="RESPONSE_DATA">book id=&amp;quot;bk101&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Gambardella, Matthew&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;XML Developer&amp;apos;s Guide&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Computer&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;44.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-10-01&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;An in-depth look at creating applications 
+      with XML.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk102&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Ralls, Kim&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Midnight Rain&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Fantasy&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;5.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-12-16&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;A former architect battles corporate zombies, 
+      an evil sorceress, and her own childhood to become queen 
+      of the world.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk103&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Corets, Eva&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Maeve Ascendant&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Fantasy&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;5.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-11-17&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;After the collapse of a nanotechnology 
+      society in England, the young survivors lay the 
+      foundation for a new society.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk104&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Corets, Eva&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Oberon&amp;apos;s Legacy&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Fantasy&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;5.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2001-03-10&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;In post-apocalypse England, the mysterious 
+      agent known only as Oberon helps to create a new life 
+      for the inhabitants of London. Sequel to Maeve 
+      Ascendant.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk105&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Corets, Eva&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;The Sundered Grail&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Fantasy&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;5.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2001-09-10&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;The two daughters of Maeve, half-sisters, 
+      battle one another for control of England. Sequel to 
+      Oberon&amp;apos;s Legacy.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk106&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Randall, Cynthia&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Lover Birds&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Romance&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;4.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-09-02&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;When Carla meets Paul at an ornithology 
+      conference, tempers fly as feathers get ruffled.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk107&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Thurman, Paula&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Splish Splash&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Romance&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;4.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-11-02&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;A deep sea diver finds true love twenty 
+      thousand leagues beneath the sea.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk108&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Knorr, Stefan&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Creepy Crawlies&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Horror&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;4.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-12-06&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;An anthology of horror stories about roaches,
+      centipedes, scorpions  and other insects.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk109&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Kress, Peter&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Paradox Lost&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Science Fiction&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;6.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-11-02&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;After an inadvertant trip through a Heisenberg
+      Uncertainty Device, James Salway discovers the problems 
+      of being quantum.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk110&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;O&amp;apos;Brien, Tim&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Microsoft .NET: The Programming Bible&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Computer&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;36.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-12-09&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;Microsoft&amp;apos;s .NET initiative is explored in 
+      detail in this deep programmer&amp;apos;s reference.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk111&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;O&amp;apos;Brien, Tim&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;MSXML3: A Comprehensive Guide&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Computer&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;36.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2000-12-01&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;The Microsoft MSXML3 parser is covered in 
+      detail, with attention to XML DOM interfaces, XSLT processing, 
+      SAX and more.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;
+   &amp;lt;book id=&amp;quot;bk112&amp;quot;&amp;gt;
+      &amp;lt;author&amp;gt;Galos, Mike&amp;lt;/author&amp;gt;
+      &amp;lt;title&amp;gt;Visual Studio 7: A Comprehensive Guide&amp;lt;/title&amp;gt;
+      &amp;lt;genre&amp;gt;Computer&amp;lt;/genre&amp;gt;
+      &amp;lt;price&amp;gt;49.95&amp;lt;/price&amp;gt;
+      &amp;lt;publish_date&amp;gt;2001-04-16&amp;lt;/publish_date&amp;gt;
+      &amp;lt;description&amp;gt;Microsoft Visual Studio 7 is explored in depth,
+      looking at how Visual Basic, Visual C++, C#, and ASP+ are 
+      integrated into a comprehensive development 
+      environment.&amp;lt;/description&amp;gt;
+   &amp;lt;/book&amp;gt;</stringProp>
+          <stringProp name="RESPONSE_TIME">${__Random(50,500)}</stringProp>
+          <stringProp name="LATENCY">${__Random(1,50)}</stringProp>
+          <stringProp name="CONNECT">${__Random(1,5)}</stringProp>
+          <stringProp name="URL"></stringProp>
+          <stringProp name="RESULT_CLASS">org.apache.jmeter.samplers.SampleResult</stringProp>
+        </kg.apc.jmeter.samplers.DummySampler>
+        <hashTree/>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="HTTPSampler.method">GET</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <XPath2Extractor guiclass="XPath2ExtractorGui" testclass="XPath2Extractor" testname="XPath2 Extractor" enabled="true">
+            <stringProp name="XPathExtractor2.default">No Value Found</stringProp>
+            <stringProp name="XPathExtractor2.refname">answer</stringProp>
+            <stringProp name="XPathExtractor2.matchNumber">1</stringProp>
+            <stringProp name="XPathExtractor2.xpathQuery">(//*[name()=&apos;AddResult&apos;])/text()</stringProp>
+            <stringProp name="XPathExtractor2.namespaces"></stringProp>
+          </XPath2Extractor>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
